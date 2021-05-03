@@ -30,6 +30,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
       this.getPage();
+      
     // this.userService.getUserProfile().subscribe(
     //   (res) => {
     //     this.userDetails = res["user"];

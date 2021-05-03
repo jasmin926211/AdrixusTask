@@ -41,7 +41,6 @@ export class UserService {
     return this.http.get(environment.apiBaseUrl + "/userProfile");
   }
 
-  //for pagination service
   pagination(page: number) {
     return this.http.get(environment.apiBaseUrl + "/employeeDetails/?page=" + page);
   }
@@ -94,6 +93,10 @@ export class UserService {
 
     let startIndex = (currentPage - 1) * pageSize;
     let endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
+    
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    console.log(startIndex);
+    console.log(endIndex);
 
     let pages = _.range(startPage, endPage + 1);
 
