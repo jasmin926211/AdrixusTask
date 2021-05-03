@@ -1,0 +1,61 @@
+<div class="container tableData">
+<div>
+    <button  type="button"  class= "logoutBtn btn btn-warning" (click)="onLogout()" value="Logout">Logout</button>
+</div>
+<div>
+    <div class="filerDiv">
+       <mat-form-field class="filterField">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search record here...." #input>
+      </mat-form-field>
+    </div>
+      
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="lastname">
+          <th mat-header-cell *matHeaderCellDef> Last Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="gender">
+          <th mat-header-cell *matHeaderCellDef> Gender </th>
+          <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          </ng-container>
+
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+        
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+</div>
+
+<div class="paginationDiv">
+    <ul *ngIf= "pager.pages && pager.pages.length" class="nav nav-pills justify-content-end">
+        <li (click)="setPage(pager.currentPage -1)" class="page-item next-item" [ngClass]="{disabled:pager.currentPage === 1}">
+          <a href="javascript: void(0)" class="page-link">Previous</a>
+        </li>
+        <li class="nav-item" *ngFor="let page of pager.pages">
+            <a href="javascript: void(0)" class="nav-link" (click)="setPage(page)" [ngClass]="{active:pager.currentPage === page}">
+                {{page}}
+            </a>
+        </li>
+        <li (click)="setPage(pager.currentPage +1)" class="page-item next-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}">
+          <a href="javascript: void(0)" class="page-link">Next</a>
+        </li>
+    </ul>  
+</div>   
+<div>
